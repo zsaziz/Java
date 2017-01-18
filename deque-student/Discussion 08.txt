@@ -1,0 +1,40 @@
+public void addToRear(T element) {
+		// TODO(1)
+		if (isEmpty()){
+			DLNode<T> temp = new DLNode<T>(element,null,null);
+			head = temp;
+			tail = temp;
+		}
+		else{
+			tail = new DLNode<T>(element,null,tail);
+		}
+	
+	}
+
+public T removeRear() throws DequeUnderflowException {
+		// TODO(2)
+		if (isEmpty()) throw new DequeUnderflowException();
+		T temp = tail.getData();
+		tail.getPrev().setNext(null);
+		tail = tail.getPrev();
+		return temp; //cross this out
+	}
+
+public T last() throws DequeUnderflowException {
+		// TODO(3)
+		return tail.getData(); 	
+	}
+
+Error 1:
+The line insert(null); in the sort method was the problem as the element being inserted cannot be null. You can fix this by removing this line.
+
+Error 2:
+The problem is in the for loop in the sort method. It is starting from index 1 (i = 1) which means it will skip the first element being added which in this case was 5. You can fix this by changing the index to start at index 0 ( i = 0).
+
+Error 3:
+The  problem is that in the insert method when adding to the middle of the list, it is starting from head which will not work for descending. You can fix this by:
+1) setting current = tail instead of head
+2) change the compareTo from > 0 to < 0 in the while statement.
+3) in the while loop, set current = current.getPrev() instead of current.getNext().
+4) change the arguments when creating the new insert method to (element, prev, current) from (element, current, prev)
+5) change prev.setNext(insert) to prev.setPrev(insert)
